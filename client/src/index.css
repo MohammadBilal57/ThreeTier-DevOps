@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-body: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Colors - Deep Space Theme */
+  --color-base-950: #05070f;
+  --color-base-900: #080c14;
+  --color-base-800: #0d1220;
+  --color-base-700: #131929;
+  --color-base-600: #1b2339;
+
+  /* Neon Accents */
+  --color-neon-cyan: #00e5cc;
+  --color-neon-blue: #3d8bff;
+  --color-neon-purple: #a855f7;
+  --color-neon-orange: #ff6b35;
+  --color-neon-red: #ff4757;
+  --color-neon-green: #2ecc71;
+
+  /* Font Weights Mapping */
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+  --font-weight-800: 800;
+
+  /* Animations */
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* Base Styles */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-base-950 text-white font-body antialiased;
+    background-image:
+      radial-gradient(ellipse at 20% 50%,
+        rgba(0, 229, 204, 0.04) 0%,
+        transparent 60%),
+      radial-gradient(ellipse at 80% 20%,
+        rgba(61, 139, 255, 0.04) 0%,
+        transparent 60%);
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+  }
+
+  ::selection {
+    background: rgba(0, 229, 204, 0.25);
+    color: white;
+  }
+}
+
+/* Custom Utilities */
+@utility glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@utility glass-hover {
+  @apply glass transition-all duration-300;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+  }
+}
+
+@utility neon-border-cyan {
+  border-color: rgba(0, 229, 204, 0.3) !important;
+  box-shadow: 0 0 20px rgba(0, 229, 204, 0.1);
+}
+
+@utility neon-border-blue {
+  border-color: rgba(61, 139, 255, 0.3) !important;
+  box-shadow: 0 0 20px rgba(61, 139, 255, 0.1);
+}
+
+@utility text-gradient-cyan {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-neon-cyan to-neon-blue;
+}
+
+@utility text-gradient-warm {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-neon-orange to-neon-purple;
+}
+
+@utility input-base {
+  @apply w-full bg-base-800/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/20 outline-none transition-all duration-200 font-body;
+
+  &:focus {
+    @apply border-neon-cyan/40 bg-base-800/80;
+    box-shadow: 0 0 0 4px rgba(0, 229, 204, 0.06);
+  }
+}
+
+@utility btn-primary {
+  @apply flex items-center justify-center gap-2 px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-300 active:scale-95 select-none;
+  background: linear-gradient(135deg, #00e5cc, #3d8bff);
+  color: #05070f;
+  box-shadow: 0 8px 20px -6px rgba(0, 229, 204, 0.5);
+
+  &:hover {
+    box-shadow: 0 12px 32px -8px rgba(0, 229, 204, 0.6);
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+}
+
+@utility btn-ghost {
+  @apply flex items-center justify-center gap-2 px-5 py-2 rounded-xl text-sm font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200 active:scale-95 select-none;
+}
+
+@utility badge-high {
+  @apply bg-neon-red/10 text-neon-red border border-neon-red/20;
+}
+
+@utility badge-medium {
+  @apply bg-neon-orange/10 text-neon-orange border border-neon-orange/20;
+}
+
+@utility badge-low {
+  @apply bg-neon-green/10 text-neon-green border border-neon-green/20;
+}
+
+@utility skeleton {
+  @apply bg-base-800 overflow-hidden relative;
+
+  &::after {
+    content: "";
+    @apply absolute inset-0;
+    background: linear-gradient(90deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+}
