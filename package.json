@@ -1,0 +1,22 @@
+{
+  "name": "three-tier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Test passed\"",
+    "build": "echo \"Build successful\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohammadBilal57/ThreeTier-DevOps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MohammadBilal57/ThreeTier-DevOps/issues"
+  },
+  "homepage": "https://github.com/MohammadBilal57/ThreeTier-DevOps#readme"
+}
